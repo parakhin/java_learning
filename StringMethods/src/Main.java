@@ -2,7 +2,44 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        fioFromConsole();
+        printSumFromText("Вася заработал 5000, петя - 500. Ну а маша 150");
+    }
+
+    public static String phoneConverter (String phone) {
+        phone = phone.trim()
+                .replaceAll("[^0-9]", "")
+                .replaceAll("^8|^7", "+7")
+                .replaceAll("^9", "+79")
+
+        ;
+
+        return phone;
+    }
+
+    public static void printSumFromText (String strWithIntNumbers) {
+        String str = strWithIntNumbers.replaceAll("[^0-9]", " ");
+        String[] items = str.trim().split("\\s+");
+        int res = 0;
+        for (var i = 0; i < items.length; i++ ) {
+            res += Integer.parseInt(items[i]);
+        }
+        System.out.println(res);
+    }
+
+    public static void stringBuilder () {
+        var str1 = "ааа";
+        var str2 = "ббб";
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(str1);
+
+        long start = System.currentTimeMillis();
+        for (var i = 0; i < 100000; i++) {
+            builder.append(str2);
+        }
+        System.out.println(builder.length());
+        System.out.println(System.currentTimeMillis() - start);
     }
 
     public static void printCharCodes () {
