@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String alfabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXWZ";
+        String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXWZ";
 
-        for(var i = 0; i < alfabet.length(); i++) {
-            System.out.println((int) alfabet.charAt(i));
+        for(var i = 0; i < alphabet.length(); i++) {
+            System.out.println((int) alphabet.charAt(i));
         }
 
         System.out.println("Введите ФИО");
