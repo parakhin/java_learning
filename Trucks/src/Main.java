@@ -15,15 +15,32 @@ public class Main {
             }
         }
 
-        int containersCount = (int) Math.ceil(boxCount / 27.0);
-        int trucksCount =  (int) Math.ceil(containersCount / 12.0);
+        IContainer[] containers = TransportManager.getContainers(boxCount);
+        ITruck[] trucks = TransportManager.getTrucks(containers.length);
+        IBox[] boxes = new Box[boxCount];
 
-        for (var i = 0; i < trucksCount; i++) {
-            System.out.println("Грузовик " + i);
-            for (var j = i * 12; j < (i * 12 + 12) && j < containersCount; j++) {
-                System.out.println("\tКонтейнер " + (j));
-                for (var k = j * 27; k < (j * 27 + 27) && k < boxCount; k++) {
-                    System.out.println("\t\tЯщик " + (k));
+        for (var i = 0; i < boxCount; i++) {
+            boxes[i] = new Box(i);
+        }
+
+        TransportManager.placeBoxToContainers(containers, boxes);
+        TransportManager.placeContainersToTrucks(trucks, containers);
+
+
+        for (var i = 0; i < trucks.length; i++) {
+            System.out.println(trucks[i]);
+            var containersInTruck = trucks[i].getContainers();
+            for (var j = 0; j < containersInTruck.length; j++) {
+                if (containersInTruck[j] == null) {
+                    break;
+                }
+                System.out.println("\t" + containersInTruck[j]);
+                var boxInContainer = containersInTruck[j].getBoxes();
+                for (var k = 0; k < boxInContainer.length; k++){
+                    if (boxInContainer[k] == null) {
+                        break;
+                    }
+                    System.out.println("\t\t" + boxInContainer[k]);
                 }
             }
         }
