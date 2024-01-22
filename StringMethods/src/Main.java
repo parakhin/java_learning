@@ -1,13 +1,27 @@
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            System.out.println(phoneConverter(" sfg 90sd25-05--   8574"));
-        } catch (Exception e) {
+        Calendar birthday = Calendar.getInstance();
+        birthday.set(1986, Calendar.AUGUST, 14);
+        printAllBirthdaysDayNameInWeek(birthday);
+    }
 
+    public static void printAllBirthdaysDayNameInWeek (Calendar date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy E");
+        var yearsDif = Calendar.getInstance().get(Calendar.YEAR) - date.get(Calendar.YEAR);
+
+        while (date.get(Calendar.YEAR) <= Calendar.getInstance().get(Calendar.YEAR)) {
+            System.out.println(dateFormat.format(date.getTime()));
+            date.add(Calendar.YEAR, 1);
         }
-
     }
 
     public static String phoneConverter (String phone) throws Exception {
