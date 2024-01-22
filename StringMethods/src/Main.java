@@ -2,12 +2,18 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        fioFromConsole();
+    }
+
+    public static void printCharCodes () {
         String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXWZ";
 
         for(var i = 0; i < alphabet.length(); i++) {
             System.out.println((int) alphabet.charAt(i));
         }
+    }
 
+    public static void fioFromConsole () {
         System.out.println("Введите ФИО");
         String input = (new Scanner(System.in)).nextLine();
 
