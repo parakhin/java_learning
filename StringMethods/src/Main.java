@@ -2,18 +2,32 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        printSumFromText("Вася заработал 5000, петя - 500. Ну а маша 150");
+        try {
+            System.out.println(phoneConverter(" sfg 90sd25-05--   8574"));
+        } catch (Exception e) {
+
+        }
+
     }
 
-    public static String phoneConverter (String phone) {
+    public static String phoneConverter (String phone) throws Exception {
         phone = phone.trim()
                 .replaceAll("[^0-9]", "")
-                .replaceAll("^8|^7", "+7")
-                .replaceAll("^9", "+79")
+                .replaceAll("^89|^79|^9", "+7(9");
 
-        ;
+        if (phone.length() != 13) {
+            throw new Exception("Wrong phone number");
+        }
 
-        return phone;
+
+
+        return phone.substring(0, 6)
+                + ")"
+                + phone.substring(6, 9)
+                + "-"
+                + phone.substring(9, 11)
+                + "-"
+                + phone.substring(11);
     }
 
     public static void printSumFromText (String strWithIntNumbers) {
