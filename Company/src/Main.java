@@ -14,6 +14,16 @@ public class Main
     {
         ArrayList<Employee> staff = loadStaffFromFile();
 
+        Collections.sort(staff, (emp1, emp2) -> {
+            if (emp1.getSalary().compareTo(emp2.getSalary()) == 0) {
+                return emp1.getName().compareTo(emp2.getName());
+            }
+            return emp1.getSalary().compareTo(emp2.getSalary());
+        });
+
+        for (Employee employee: staff) {
+            System.out.println(employee);
+        }
 
     }
 
