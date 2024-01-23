@@ -1,9 +1,28 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        todoList();
+        mail();
+    }
+
+    public static void mail() {
+        HashSet<String> emails = new HashSet<>();
+        var scanner = new Scanner(System.in);
+        String input = "";
+        while (!input.equals("exit")) {
+            input = scanner.nextLine().trim();
+            if (input.matches("^(.+)@(\\S+)$")) {
+                emails.add(input);
+            }
+
+            if (input.equals("list")) {
+                for (var email: emails) {
+                    System.out.println(email);
+                }
+            }
+        }
     }
 
     public static void todoList () {
