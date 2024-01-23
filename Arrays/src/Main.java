@@ -2,7 +2,41 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        phone();
+        CarNumbersSystem nums = new CarNumbersSystem();
+
+        var scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Введите номер машины для поиска");
+            var input = scanner.nextLine();
+            if (input.equals("exit")) {
+                break;
+            }
+
+            long start;
+            boolean isFind;
+            int index = 0;
+            long duration;
+
+            start = System.currentTimeMillis();
+            isFind = nums.isInNumber(input);
+            duration = System.currentTimeMillis() - start;
+            System.out.println("isInNumber duration " + duration + " and result is " + isFind);
+
+            start = System.currentTimeMillis();
+            isFind = nums.isInTree(input);
+            duration = System.currentTimeMillis() - start;
+            System.out.println("isInTree duration " + duration + " and result is " + isFind);
+
+            start = System.currentTimeMillis();
+            isFind = nums.isInHash(input);
+            duration = System.currentTimeMillis() - start;
+            System.out.println("isInHash duration " + duration + " and result is " + isFind);
+
+            start = System.currentTimeMillis();
+            index = nums.binarySearch(input);
+            duration = System.currentTimeMillis() - start;
+            System.out.println("binarySearch duration " + duration + " and result is index " + index);
+        }
     }
 
     public static void phone () {
