@@ -1,6 +1,44 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        printX();
+        todoList();
+    }
+
+    public static void todoList () {
+        var todoList = new TodoList();
+        Scanner scanner = new Scanner(System.in);
+
+        String input = "";
+
+        while(!input.equals("exit")) {
+            System.out.println("Введите команду");
+            input = scanner.nextLine();
+            try {
+                todoList.actionByInput(input);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
+        }
+    }
+
+    public static void learningLists() {
+        ArrayList<String> todoList = new ArrayList<>(){{
+            add("Нулевой элемент");
+            add("0.1");
+        }};
+        todoList.add("Изучть списки");
+        todoList.add("Изучть списки2");
+        todoList.add("Изучть списки3");
+        todoList.add("Изучть списки4");
+        todoList.remove(2);
+        todoList.add(2, "Изучть списки5");
+
+        for (var item: todoList){
+            System.out.println(item);
+        }
     }
 
     public static void printX() {
