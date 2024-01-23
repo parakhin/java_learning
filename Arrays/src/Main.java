@@ -1,10 +1,92 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        mail();
+        phone();
+    }
+
+    public static void phone () {
+        TreeMap<String, String> phoneBook= new TreeMap<>();
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            String input = scanner.nextLine().trim();
+            if (input.equals("exit")) {
+                break;
+            }
+
+            if (input.equals("LIST")) {
+                for (String name: phoneBook.keySet()) {
+                    System.out.println("name: " + name + "; phone: " + phoneBook.get(name));
+                }
+                continue;
+            }
+
+            int spacePosition = input.indexOf(" ");
+            String name = "";
+            String phone = "";
+
+            //if input has name and phone number we just add/update name
+            if (spacePosition != -1) {
+                name = input.substring(0, spacePosition);
+                phone = input.substring(spacePosition).trim();
+                phoneBook.put(name, phone);
+                continue;
+            }
+            //If input is phone number
+            if (input.matches(".+\\d+.+")) {
+                if (phoneBook.containsValue(input)) {
+                    for (String key: phoneBook.keySet()) {
+                        if (phoneBook.get(key).equals(input)) {
+                            System.out.println("name: " + key + "; phone: " + phoneBook.get(key));
+                            break;
+                        }
+                    }
+                } else {
+                    System.out.println("Введите имя:");
+                    name = scanner.nextLine();
+                    phoneBook.put(name, input);
+                }
+
+                continue;
+            }
+
+            if (phoneBook.containsKey(input)) {
+                System.out.println("name: " + input + "; phone: " + phoneBook.get(input));
+            } else {
+                System.out.println("Введите номер телефона:");
+                phone = scanner.nextLine();
+                phoneBook.put(input, phone);
+            }
+
+        }
+    }
+
+    public static void hashAndTreeMap () {
+        HashMap<String, Integer> products = new HashMap<String, Integer>();
+        products.put("1Колбаса", 500);
+        products.put("2Ветчина", 600);
+        products.put("3Сыр", 300);
+        System.out.println(products.get("1Колбаса"));
+
+        TreeMap<String, Integer> sortedProducts = new TreeMap<>();
+        sortedProducts.put("1Колбаса", 500);
+        sortedProducts.put("2Ветчина", 600);
+        sortedProducts.put("3Сыр", 300);
+        System.out.println(sortedProducts.get("2Ветчина"));
+
+        System.out.println("=================HashMap==================");
+        for (var key: products.keySet()) {
+            System.out.println(key + " => " + products.get(key));
+        }
+        System.out.println("=================TreeMap==================");
+        for (var key: sortedProducts.keySet()) {
+            System.out.println(key + " => " + products.get(key));
+        }
+
+        Set<String> allKeysOfHashOrTreMap = products.keySet();
+
     }
 
     public static void mail() {
