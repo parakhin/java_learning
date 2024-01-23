@@ -1,5 +1,6 @@
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -7,23 +8,20 @@ import java.util.stream.Stream;
 
 public class Main
 {
+
     private static String staffFile = "data/staff.txt";
     private static String dateFormat = "dd.MM.yyyy";
 
     public static void main(String[] args)
     {
+
         ArrayList<Employee> staff = loadStaffFromFile();
 
-        Collections.sort(staff, (emp1, emp2) -> {
-            if (emp1.getSalary().compareTo(emp2.getSalary()) == 0) {
-                return emp1.getName().compareTo(emp2.getName());
-            }
-            return emp1.getSalary().compareTo(emp2.getSalary());
-        });
-
-        for (Employee employee: staff) {
-            System.out.println(employee);
-        }
+        staff.stream().filter(e -> {
+            var calendar = Calendar.getInstance();
+            calendar.setTime(e.getWorkStart());
+            return calendar.get(Calendar.YEAR) == 2017;
+        }).max(Comparator.comparing(Employee::getSalary)).ifPresent(System.out::println);
 
     }
 
